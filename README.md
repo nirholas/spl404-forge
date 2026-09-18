@@ -49,6 +49,7 @@ Public RPC endpoints are rate limited. For real traffic set `VITE_SOLANA_RPC_URL
 - Keys never reach this page. Wallets sign, and nothing is sent without a wallet prompt.
 - On-chain bytes are written by strangers, so they are never inserted as HTML or executed. Images, audio, and video render through object URLs; SVG and HTML are shown as source text only, because both can carry script.
 - A chunked file is rendered only after its rebuilt bytes match the hash recorded in its manifest.
+- A Content Security Policy ([public/_headers](./public/_headers)) allows scripts only from this origin and media only from local `blob:` and `data:` URLs, and forbids plugins and framing. Network requests may go to any `https:` origin, because a viewer can point the app at their own RPC endpoint.
 - Sign-In With Solana verifies the returned signature against the account's own public key before the session is trusted.
 - Everything written here is public and permanent. Do not inscribe secrets, personal data, or content you do not have the rights to.
 
