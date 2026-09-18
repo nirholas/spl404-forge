@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Inspect any Solana transaction or account, reveal the media hidden inside it, and inscribe your own files on-chain with your wallet." />
+    <meta name="theme-color" content="#08090a" />
+    <meta property="og:title" content="SPL404 Forge" />
+    <meta property="og:description" content="See what is really inside a Solana transaction, then put your own bytes there." />
+    <meta property="og:type" content="website" />
+    <title>SPL404 Forge — see what is really on-chain</title>
+  </head>
+  <body>
+    <div id="scene" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="SPL404 Forge home"><span class="brand-mark"></span>SPL404 <b>FORGE</b></a>
+      <nav aria-label="Primary">
+        <a href="#verify">Inspect</a><a href="#forge">Inscribe</a><a href="#feed">Feed</a><a href="#about">Protocol</a>
+      </nav>
+      <div class="topbar-actions">
+        <label class="network-select">
+          <span class="dot" id="network-dot"></span>
+          <select id="network-select" aria-label="Solana network">
+            <option value="mainnet">Mainnet</option>
+            <option value="devnet">Devnet</option>
+          </select>
+        </label>
+        <button class="ghost icon" id="settings-button" type="button" aria-label="Settings">⚙</button>
+        <button class="wallet-button" id="wallet-button" type="button">Connect wallet</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <p class="eyebrow"><span></span> Transaction v1 is live: 4,096 bytes per transaction</p>
+        <h1>See what is really<br /><em>inside the chain.</em></h1>
+        <p class="hero-copy">Paste any signature, address, or explorer link. SPL404 Forge asks Solana directly, decodes every memo, instruction, and account buffer in your browser, and shows you the images, files, and JSON hiding in them. Then it lets you put your own bytes there.</p>
+        <div class="hero-actions">
+          <a class="primary" href="#verify">Inspect something</a>
+          <a class="secondary" href="#forge">Inscribe a file <span aria-hidden="true">↗</span></a>
+        </div>
+        <dl class="facts">
+          <div><dt>4,096 B</dt><dd>v1 envelope</dd></div>
+          <div><dt>SHA-256</dt><dd>verified rebuilds</dd></div>
+          <div><dt>Local</dt><dd>every byte decoded in-browser</dd></div>
+          <div><dt>0</dt><dd>servers between you and Solana</dd></div>
+        </dl>
+      </section>
+
+      <section class="workspace" id="verify">
+        <div class="section-heading">
+          <div><p class="kicker">01 / Inspector</p><h2>Trust the transaction, not the website.</h2></div>
+          <p>Works on transactions, wallets, mints, and program accounts. Chunked files are rebuilt from their manifest and checked against their hash before anything renders.</p>
+        </div>
+        <form id="inspect-form" class="input-card">
+          <label for="inspect-input">Signature, address, or explorer link</label>
+          <div class="input-row">
+            <input id="inspect-input" autocomplete="off" spellcheck="false" placeholder="Paste a signature, mint address, or Solscan link" required />
+            <button type="submit" id="inspect-submit">Reveal <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="input-meta">
+            <span id="rpc-label">Mainnet</span>
+            <span class="meta-links"><button type="button" class="link" id="example-button">Load an example</button></span>
+          </div>
+        </form>
+        <div id="inspect-status" class="status" role="status" hidden></div>
+        <div id="inspect-result" class="result" hidden></div>
+      </section>
+
+      <section class="workspace" id="forge">
+        <div class="section-heading">
+          <div><p class="kicker">02 / Forge</p><h2>Make the chain your canvas.</h2></div>
+          <p>Text, JSON, or a file. Anything too large for one transaction is split into chunks with a manifest, so it can be rebuilt and verified by anyone, forever, with no server in the path.</p>
+        </div>
+        <div class="forge-grid">
+          <form id="forge-form" class="forge-card">
+            <div class="tabs" role="tablist" aria-label="Payload type">
+              <button class="active" type="button" role="tab" aria-selected="true" data-kind="text">Text or JSON</button>
+              <button type="button" role="tab" aria-selected="false" data-kind="file">File</button>
+            </div>
+            <div id="text-field">
+              <label for="memo-input">Payload</label>
+              <textarea id="memo-input" rows="7" spellcheck="false" placeholder='{"note":"the first thing I put on-chain"}'></textarea>
+            </div>
+            <div id="file-field" hidden>
+              <label class="drop" for="file-input" id="file-drop">
+                <span id="file-drop-title">Choose a file, or drop one here</span>
+                <small id="file-drop-hint">Images, audio, JSON, anything. Larger files simply take more transactions.</small>
+              </label>
+              <input id="file-input" type="file" hidden />
+            </div>
+            <div class="meter">
+              <span><i id="byte-count">0</i> bytes · <i id="plan-summary">nothing to write yet</i></span>
+              <div class="bar"><i id="byte-bar"></i></div>
+            </div>
+            <label class="switch"><input type="checkbox" id="list-toggle" checked /><span>List in the public feed</span></label>
+            <button class="primary full" id="forge-submit" type="submit">Connect a wallet to inscribe</button>
+            <p class="form-note" id="forge-note">Network fees apply. On-chain content is public and permanent.</p>
+          </form>
+          <aside class="receipt" id="forge-receipt"></aside>
+        </div>
+      </section>
+
+      <section class="workspace" id="feed">
+        <div class="section-heading">
+          <div><p class="kicker">03 / Feed</p><h2>What people just put on-chain.</h2></div>
+          <p>Creations that opted into the public index, read live from Solana. The index is a program-derived address nobody controls, so this list needs no database.</p>
+        </div>
+        <div id="feed-status" class="status" role="status" hidden></div>
+        <div id="feed-grid" class="feed-grid"></div>
+        <button class="ghost wide" id="feed-refresh" type="button">Refresh the feed</button>
+      </section>
+
+      <section class="protocol" id="about">
+        <p class="kicker">Open by design</p>
+        <h2>A microscope,<br />not a gatekeeper.</h2>
+        <div class="protocol-grid">
+          <article><span>01</span><h3>RPC native</h3><p>Standard Solana JSON-RPC with transaction version 1 enabled. Point it at your own endpoint in settings.</p></article>
+          <article><span>02</span><h3>Wallet controlled</h3><p>Keys never reach this page. Your wallet shows and signs every transaction, and nothing is sent without it.</p></article>
+          <article><span>03</span><h3>Verifiable</h3><p>Chunked files carry a manifest and a SHA-256. A rebuild that does not match its hash is refused, not rendered.</p></article>
+          <article><span>04</span><h3>Yours to fork</h3><p>The parser, the protocol, and this page are open source. Read it, change the RPC, deploy your own.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="#top"><span class="brand-mark"></span>SPL404 <b>FORGE</b></a>
+      <p>Built for the first 4 KiB of a new Solana era.</p>
+      <a href="https://github.com/nirholas/spl404-forge" rel="noopener">Source ↗</a>
+    </footer>
+
+    <div id="modal-root"></div>
+    <div id="toast-root" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "spl404-forge",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@noble/curves": "^2.4.0",
+    "@noble/hashes": "^2.4.0",
+    "@solana-program/compute-budget": "^0.18.1",
+    "@solana-program/memo": "^0.14.0",
+    "@solana-program/system": "^0.14.1",
+    "@solana-program/token-2022": "^0.18.0",
+    "@solana/kit": "^8.3.0",
+    "@solana/wallet-standard-features": "^1.5.0",
+    "@wallet-standard/app": "^1.1.1",
+    "marked": "^18.0.13",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.5",
+    "vitest": "^3.2.4"
+  }
+}
