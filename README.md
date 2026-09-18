@@ -63,7 +63,3 @@ Public RPC endpoints are rate limited. For real traffic set `VITE_SOLANA_RPC_URL
 | `docs/` | The [inscription protocol](./docs/protocol.md) and the [architecture](./docs/architecture.md). |
 
 The protocol is deliberately small enough to reimplement without this app: read [docs/protocol.md](./docs/protocol.md) and you can write and rebuild the same files from any client.
-
-## License
-
-MIT. See [LICENSE](./LICENSE).
