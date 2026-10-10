@@ -1,0 +1,26 @@
+# spl404-forge
+
+> See what is really inside a Solana transaction, then inscribe your own files on-chain with your wallet. Transaction v1 ready.
+
+spl404-forge is an open-source repository by nirholas, part of the three.ws ecosystem.
+
+## Docs
+
+- [README](https://github.com/nirholas/spl404-forge/blob/HEAD/README.md): install, usage and reference
+- [What it does](https://github.com/nirholas/spl404-forge/blob/HEAD/README.md#what-it-does)
+- [Transaction v1](https://github.com/nirholas/spl404-forge/blob/HEAD/README.md#transaction-v1)
+- [Quick start](https://github.com/nirholas/spl404-forge/blob/HEAD/README.md#quick-start)
+- [Deploy](https://github.com/nirholas/spl404-forge/blob/HEAD/README.md#deploy)
+- [Safety model](https://github.com/nirholas/spl404-forge/blob/HEAD/README.md#safety-model)
+- [How it is put together](https://github.com/nirholas/spl404-forge/blob/HEAD/README.md#how-it-is-put-together)
+- [AGENTS.md](https://github.com/nirholas/spl404-forge/blob/HEAD/AGENTS.md): guidance for coding agents
+- [Full text for LLMs](https://github.com/nirholas/spl404-forge/blob/HEAD/llms-full.txt): the README inlined
+
+## Project
+
+- [Source](https://github.com/nirholas/spl404-forge)
+- [Issues](https://github.com/nirholas/spl404-forge/issues)
+- [Discussions](https://github.com/nirholas/spl404-forge/discussions)
+- [Homepage](https://spl404-forge.pages.dev)
+- [three.ws](https://three.ws): the platform this is part of
+- [All repositories by nirholas](https://github.com/nirholas/nirholas#readme)
